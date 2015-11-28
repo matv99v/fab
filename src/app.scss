@@ -2,21 +2,28 @@
 $red: red;
 $black: black;
 
+*{
+	box-sizing: border-box;
+}
 
+body{
+	overflow-y: hidden;
+}
 
-$squareDimensions: 7vmax;
+#info{
+	position: fixed;
+	font-size: 25px;
+	color: white;
+	z-index: 1000;
+}
 
 
 .square{
-	width: $squareDimensions;
-	height: $squareDimensions;
-	display: inline-block;
 	opacity: 0.5;
-	border: 5px solid tarnsparent;
 }
 
 .square:hover{
-	background-color: green;
+	background: green;
 }
 
 .red{
