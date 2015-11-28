@@ -52,19 +52,14 @@
 	var info = document.getElementById("info");
 
 
-
 	var code = [  "T11-B11-T21-R11-T31-R11-T21-B11-T11",
-				  "B21-T21-R23-T11-R23-T21-B21",
+				  "B21-T21-R23news-T11-R23contact-T21-B21",
 				  "T21-R11-T11-T11-T11-R11-T21",
 				  "T31-B11-T11-B11-T31",
-				  "R11-R32-R11-T11-B11-T11-R11-R32-R11",
+				  "R11-R32band-R11-T11-B11-T11-R11-R32media-R11",
 				  "T11-T11-B11-T11-B11-T11-T11",
 				  "T41-B11-T11-B11-T11-B11-T41"
 				];
-
-
-
-
 
 	var code  = code.map(function(line){
 		return line.split('-');
@@ -73,7 +68,7 @@
 	var parseColors = {
 		T: "tarnsparent",
 		B: "black",
-		R: "red",
+		R: "red"
 	};
 
 	function writeInfo(squareMeasure){
@@ -81,6 +76,9 @@
 		info.innerHTML += "squareMeasure: " + squareMeasure + "<br/>";
 		info.innerHTML += "sM * 13 = " + squareMeasure.slice(0,-2) * 13;
 	}
+
+
+
 
 
 	function recalculateSquares(){
@@ -97,28 +95,42 @@
 			tableRow.className = "row";
 			backEl.appendChild( tableRow );
 
-
 			line.forEach(function(lineItem){
 				var color = parseColors[lineItem.slice(0,1)];
 				var cSpan = lineItem.slice(1,2);
 				var rSpan = lineItem.slice(2,3);
-				console.log( lineItem, color, cSpan, rSpan );
-
+				var identity = lineItem.slice(3);
 				var tableData = document.createElement("td");
-
 
 				tableData.className = "square " + color;
 				tableData.colSpan = cSpan;
 				tableData.rowSpan = rSpan;
+				tableData.id = identity;
+				if (identity) {tableData.className+= " " + identity;}
+				console.log(tableData, !!(identity), identity,  tableData.className);
 
 				tableData.style.width = squareMeasure;
 				tableData.style.height = squareMeasure;
 				tableRow.appendChild( tableData );
 			});
 		});
-	}
 
+
+		var band = document.getElementById("band");
+		var news = document.getElementById("news");
+		var contact = document.getElementById("contact");
+		var media = document.getElementById("media");
+
+		var bbb = document.createElement("div");
+		bbb.innerHTML="BAND";
+		band.appendChild(bbb);
+
+		// news.document.createElement("p").innerHTML="NEWS";
+		// contact.document.createElement("p").innerHTML="CONTACT";
+		// media.document.createElement("p").innerHTML="MEDIA";
+	}
 	recalculateSquares();
+
 
 	window.addEventListener("resize", recalculateSquares);
 
@@ -158,7 +170,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  overflow-y: hidden; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.5; }\n\n.square:hover {\n  background: green; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  overflow-y: hidden; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.55; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\n.band, .media, .contact, .news {\n  color: white;\n  text-align: center; }\n\ndiv.band, .media, .contact, .news {\n  font-weight: 800; }\n", ""]);
 
 	// exports
 

@@ -19,11 +19,7 @@ body{
 
 
 .square{
-	opacity: 0.5;
-}
-
-.square:hover{
-	background: green;
+	opacity: 0.55;
 }
 
 .red{
@@ -36,4 +32,21 @@ body{
 
 .tarnsparent{
 	background-color: none;
+}
+
+.band, .media, .contact, .news {
+	color:white;
+	text-align: center;
+}
+
+div.band, .media, .contact, .news{
+	font-weight: 800;
+	// transition: transform 0.4s;
+
+}
+
+p:hover, .media:hover, .contact:hover, .news:hover {
+	// font-size: 20px;
+	// transform: scale(1);
+
 }
