@@ -82,7 +82,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\n.square {\n  width: 6.5vmax;\n  height: 6.5vmax;\n  border: 1px solid black;\n  display: inline-block; }\n\n.square:hover {\n  background-color: green; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\nbody {\n  background-color: yellow; }\n", ""]);
+	exports.push([module.id, ".square {\n  width: 7vmax;\n  height: 7vmax;\n  display: inline-block;\n  opacity: 0.5;\n  border: 5px solid tarnsparent; }\n\n.square:hover {\n  background-color: green; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n", ""]);
 
 	// exports
 
