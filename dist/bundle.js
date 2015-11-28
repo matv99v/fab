@@ -170,7 +170,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  overflow-y: hidden; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.55; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\n.band, .media, .contact, .news {\n  color: white;\n  text-align: center; }\n\ndiv.band, .media, .contact, .news {\n  font-weight: 800; }\n", ""]);
+	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  overflow-y: hidden; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.55; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\n.band, .media, .contact, .news {\n  color: white;\n  text-align: center; }\n\n.band, .media, .contact, .news {\n  font-weight: 800;\n  transform: scale(0);\n  transition: transform 0.4s; }\n\n:hover, .media:hover, .contact:hover, .news:hover {\n  transform: scale(1); }\n", ""]);
 
 	// exports
 

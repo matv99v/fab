@@ -39,14 +39,14 @@ body{
 	text-align: center;
 }
 
-div.band, .media, .contact, .news{
+.band, .media, .contact, .news{
 	font-weight: 800;
-	// transition: transform 0.4s;
+	transform: scale(0);
+	transition: transform 0.4s;
 
 }
 
-p:hover, .media:hover, .contact:hover, .news:hover {
-	// font-size: 20px;
-	// transform: scale(1);
+:hover, .media:hover, .contact:hover, .news:hover {
+	transform: scale(1);
 
 }
