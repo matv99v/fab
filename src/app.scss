@@ -1,0 +1,32 @@
+
+$red: red;
+$black: black;
+
+
+
+$squareDimensions: 7vmax;
+
+
+.square{
+	width: $squareDimensions;
+	height: $squareDimensions;
+	display: inline-block;
+	opacity: 0.5;
+	border: 5px solid tarnsparent;
+}
+
+.square:hover{
+	background-color: green;
+}
+
+.red{
+	background-color: $red;
+}
+
+.black{
+	background-color: $black;
+}
+
+.tarnsparent{
+	background-color: none;
+}

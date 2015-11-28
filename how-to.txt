@@ -1,0 +1,5 @@
+npm init
+npm i webpack -D
+touch webpack.config.js
+npm i sass-loader -D
+npm i node-sass -D
