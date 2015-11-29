@@ -77,12 +77,21 @@
 		info.innerHTML += "sM * 13 = " + squareMeasure.slice(0,-2) * 13;
 	}
 
+	function tagAppnedToParentId(tag, parent ){
+		var parentEl = document.getElementById(parent);
+		var child = document.createElement( tag );
+		child.innerHTML = parent.toUpperCase();
+		parentEl.appendChild( child );
+	}
+
+
+
 
 
 
 
 	function recalculateSquares(){
-		var squareMeasure = Math.floor(window.innerWidth / 13) + "px";
+		var squareMeasure = (Math.round(window.innerWidth / 1.3) / 10) + "px";
 		writeInfo(squareMeasure);
 
 		while (backEl.firstChild) {
@@ -114,16 +123,21 @@
 				tableRow.appendChild( tableData );
 			});
 		});
+		// var band = document.getElementById("band");
+		tagAppnedToParentId(  "span", "band" );
+		tagAppnedToParentId(  "span", "news" );
+		tagAppnedToParentId(  "span", "contact" );
+		tagAppnedToParentId(  "span", "media" );
 
 
-		var band = document.getElementById("band");
-		var news = document.getElementById("news");
-		var contact = document.getElementById("contact");
-		var media = document.getElementById("media");
+		// var news = document.getElementById("news");
+		// var contact = document.getElementById("contact");
+		// var media = document.getElementById("media");
 
-		var bbb = document.createElement("div");
-		bbb.innerHTML="BAND";
-		band.appendChild(bbb);
+		// var bbb = document.createElement("div");
+		// bbb.innerHTML="BAND";
+		// band.appendChild(bbb);
+
 
 		// news.document.createElement("p").innerHTML="NEWS";
 		// contact.document.createElement("p").innerHTML="CONTACT";
@@ -170,7 +184,7 @@
 
 
 	// module
-	exports.push([module.id, "* {\n  box-sizing: border-box; }\n\nbody {\n  overflow-y: hidden; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.55; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\n.band, .media, .contact, .news {\n  color: white;\n  text-align: center; }\n\n.band, .media, .contact, .news {\n  font-weight: 800;\n  transform: scale(0);\n  transition: transform 0.4s; }\n\n:hover, .media:hover, .contact:hover, .news:hover {\n  transform: scale(1); }\n", ""]);
+	exports.push([module.id, "body {\n  overflow-y: hidden;\n  padding: 0;\n  margin: 0;\n  font-family: ubuntu; }\n\n#info {\n  position: fixed;\n  font-size: 25px;\n  color: white;\n  z-index: 1000; }\n\n.square {\n  opacity: 0.6; }\n\n.red {\n  background-color: red; }\n\n.black {\n  background-color: black; }\n\n.tarnsparent {\n  background-color: none; }\n\ntable {\n  border-collapse: collapse;\n  color: white;\n  text-align: center; }\n\ntd.band, td.media, td.contact, td.news {\n  transition: transform 0.4s; }\n\ntd.band:hover, td.media:hover, td.contact:hover, td.news:hover {\n  transform: scale(1.1); }\n\ntd {\n  font-size: 20px; }\n\ntd:hover {\n  background: green; }\n", ""]);
 
 	// exports
 

@@ -31,12 +31,21 @@ function writeInfo(squareMeasure){
 	info.innerHTML += "sM * 13 = " + squareMeasure.slice(0,-2) * 13;
 }
 
+function tagAppnedToParentId(tag, parent ){
+	var parentEl = document.getElementById(parent);
+	var child = document.createElement( tag );
+	child.innerHTML = parent.toUpperCase();
+	parentEl.appendChild( child );
+}
+
+
+
 
 
 
 
 function recalculateSquares(){
-	var squareMeasure = Math.floor(window.innerWidth / 13) + "px";
+	var squareMeasure = (Math.round(window.innerWidth / 1.3) / 10) + "px";
 	writeInfo(squareMeasure);
 
 	while (backEl.firstChild) {
@@ -68,16 +77,21 @@ function recalculateSquares(){
 			tableRow.appendChild( tableData );
 		});
 	});
+	// var band = document.getElementById("band");
+	tagAppnedToParentId(  "span", "band" );
+	tagAppnedToParentId(  "span", "news" );
+	tagAppnedToParentId(  "span", "contact" );
+	tagAppnedToParentId(  "span", "media" );
 
 
-	var band = document.getElementById("band");
-	var news = document.getElementById("news");
-	var contact = document.getElementById("contact");
-	var media = document.getElementById("media");
+	// var news = document.getElementById("news");
+	// var contact = document.getElementById("contact");
+	// var media = document.getElementById("media");
 
-	var bbb = document.createElement("div");
-	bbb.innerHTML="BAND";
-	band.appendChild(bbb);
+	// var bbb = document.createElement("div");
+	// bbb.innerHTML="BAND";
+	// band.appendChild(bbb);
+
 
 	// news.document.createElement("p").innerHTML="NEWS";
 	// contact.document.createElement("p").innerHTML="CONTACT";

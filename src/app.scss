@@ -2,12 +2,15 @@
 $red: red;
 $black: black;
 
-*{
-	box-sizing: border-box;
-}
+// *{
+// 	box-sizing: border-box;
+// }
 
 body{
 	overflow-y: hidden;
+	padding: 0;
+	margin: 0;
+	font-family: ubuntu;
 }
 
 #info{
@@ -19,7 +22,7 @@ body{
 
 
 .square{
-	opacity: 0.55;
+	opacity: 0.6;
 }
 
 .red{
@@ -34,19 +37,39 @@ body{
 	background-color: none;
 }
 
-.band, .media, .contact, .news {
+table{
+	border-collapse: collapse;
 	color:white;
 	text-align: center;
 }
 
-.band, .media, .contact, .news{
-	font-weight: 800;
-	transform: scale(0);
-	transition: transform 0.4s;
-
+td {
+	&.band,
+	&.media,
+	&.contact,
+	&.news {
+		transition: transform 0.4s;
+	}
 }
 
-:hover, .media:hover, .contact:hover, .news:hover {
-	transform: scale(1);
+td {
+	&.band:hover,
+	&.media:hover,
+	&.contact:hover,
+	&.news:hover {
+		transform: scale(1.1);
+	}
+}
 
+
+
+
+td{
+	font-size: 20px;
+}
+
+
+
+td:hover{
+	background: green;
 }
