@@ -15,9 +15,23 @@ var helpers = {
 
 	init: function(){
 		helpers.squareDimmensionUPD();
+	},
+
+	randNumBetween: function (a,b){
+		return a + Math.round( Math.random() * b);
+	},
+
+	spawnBricks: function (num){
+		var colors = ["red", "orange", "yellow", "green", "aqua", "blue", "fiolet"];
+
+		for (var i = 0; i < num; i++){
+			var color = colors[helpers.randNumBetween(0, colors.length - 1)];
+			var coordX = helpers.randNumBetween(0, 12);
+			var coordY = helpers.randNumBetween(0, 12);
+			bricks.push( new Brick(color) );
+			bricks[i].updatePosition(coordX, coordY);
+		}
 	}
-
-
 };
 
 var DOMs = {
@@ -80,40 +94,16 @@ function Brick(color){
 	this.divElement.addEventListener("click", function(){
 		if (DOMs.activeEl) { DOMs.activeEl.divElement.style.outline = ""; }
 		DOMs.activeEl = this.link;
-		DOMs.activeEl.divElement.style.outline = "2px solid red";
+		DOMs.activeEl.divElement.style.outline = "5px solid red";
 	});
 
 }
 
+
 helpers.init();
 var CUSTOMGRID = 13;
 var bricks = [];
-
-function spawnBricks(num){
-	var colors = ["red", "orange", "yellow", "green", "aqua", "blue", "fiolet"];
-
-	function randNumBetween(a,b){
-		return a + Math.round( Math.random() * b);
-
-	}
-
-	for (var i = 0; i < num; i++){
-		var color = colors[randNumBetween(0, colors.length - 1)];
-		console.log(color);
-		var coordX = randNumBetween(0, 12);
-		var coordY = randNumBetween(0, 12);
-		bricks.push( new Brick(color) );
-		bricks[i].updatePosition(coordX, coordY);
-	}
-
-}
-
-spawnBricks(25);
-
-bricks.push( new Brick("yellow") );
-bricks.push( new Brick("green") );
-bricks[1].updatePosition(4,0);
-
+helpers.spawnBricks(25);
 
 
 window.addEventListener("resize", function(){
