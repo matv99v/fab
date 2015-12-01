@@ -1,75 +1,61 @@
+$squareDimmension: 7.692307692%;
 
-$red: red;
-$black: black;
+#info{
+	background-color: blue;
+	position: fixed;
+	color: white;
+	font-size: 20px;
+	bottom: 0;
+}
 
-// *{
-// 	box-sizing: border-box;
-// }
 
 body{
-	overflow-y: hidden;
 	padding: 0;
 	margin: 0;
 	font-family: ubuntu;
+	height: 100%;
 }
 
-#info{
+html{
+	height: 100%;
+}
+
+.myCanvasClass{
+	background-color: #CEF6F5;
+	width: 100%;
+	height: 100%;
+}
+
+.newBrick{
+	display: inline-block;
 	position: fixed;
-	font-size: 25px;
-	color: white;
-	z-index: 1000;
-}
-
-
-.square{
-	opacity: 0.6;
-}
-
-.red{
-	background-color: $red;
-}
-
-.black{
-	background-color: $black;
-}
-
-.tarnsparent{
-	background-color: none;
-}
-
-table{
-	border-collapse: collapse;
-	color:white;
-	text-align: center;
-}
-
-td {
-	&.band,
-	&.media,
-	&.contact,
-	&.news {
-		transition: transform 0.4s;
-	}
-}
-
-td {
-	&.band:hover,
-	&.media:hover,
-	&.contact:hover,
-	&.news:hover {
-		transform: scale(1.1);
-	}
+	transition: margin ease-out 0.75s;
 }
 
 
 
 
-td{
-	font-size: 20px;
+.brick{
+	display: inline-block;
+	position: fixed;
+	width: #{$squareDimmension};
+	padding-bottom: #{$squareDimmension};
 }
 
+.one{
+	margin-left: calc( #{$squareDimmension} * 0 ) ;
+	margin-top: calc( #{$squareDimmension} * 2 ) ;
+	background-color: green;
+}
 
+.two{
+	margin-left: calc( #{$squareDimmension} * 1 ) ;
+	margin-top: calc( #{$squareDimmension} * 3 ) ;
+	background-color: red;
+}
 
-td:hover{
-	background: green;
+.three{
+	margin-left: calc( #{$squareDimmension} * 2 ) ;
+	margin-top: calc( #{$squareDimmension} * 4 ) ;
+	background-color: yellow;
 }

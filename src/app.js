@@ -2,102 +2,142 @@ alert("start!");
 
 require("./app.scss");
 
-var backEl = document.getElementById('back');
-var info = document.getElementById("info");
+var helpers = {
 
+	calcDiscreteCoords: function (x, y){
+		var dX = Math.floor( x / squareDimmension );
+		var dY = Math.floor( y / squareDimmension );
+		return [dX, dY];
+	},
+	squareDimmensionUPD: function(){
+		squareDimmension = Math.floor((window.innerWidth / CUSTOMGRID) * 100 ) / 100;
+	},
 
-var code = [  "T11-B11-T21-R11-T31-R11-T21-B11-T11",
-			  "B21-T21-R23news-T11-R23contact-T21-B21",
-			  "T21-R11-T11-T11-T11-R11-T21",
-			  "T31-B11-T11-B11-T31",
-			  "R11-R32band-R11-T11-B11-T11-R11-R32media-R11",
-			  "T11-T11-B11-T11-B11-T11-T11",
-			  "T41-B11-T11-B11-T11-B11-T41"
-			];
-
-var code  = code.map(function(line){
-	return line.split('-');
-});
-
-var parseColors = {
-	T: "tarnsparent",
-	B: "black",
-	R: "red"
-};
-
-function writeInfo(squareMeasure){
-	info.innerHTML = "width: " + window.innerWidth + "<br/>";
-	info.innerHTML += "squareMeasure: " + squareMeasure + "<br/>";
-	info.innerHTML += "sM * 13 = " + squareMeasure.slice(0,-2) * 13;
-}
-
-function tagAppnedToParentId(tag, parent ){
-	var parentEl = document.getElementById(parent);
-	var child = document.createElement( tag );
-	child.innerHTML = parent.toUpperCase();
-	parentEl.appendChild( child );
-}
-
-
-
-
-
-
-
-function recalculateSquares(){
-	var squareMeasure = (Math.round(window.innerWidth / 1.3) / 10) + "px";
-	writeInfo(squareMeasure);
-
-	while (backEl.firstChild) {
-    	backEl.removeChild(backEl.firstChild);
+	init: function(){
+		helpers.squareDimmensionUPD();
 	}
 
 
-	code.forEach(function(line){
-		var tableRow = document.createElement("tr");
-		tableRow.className = "row";
-		backEl.appendChild( tableRow );
+};
 
-		line.forEach(function(lineItem){
-			var color = parseColors[lineItem.slice(0,1)];
-			var cSpan = lineItem.slice(1,2);
-			var rSpan = lineItem.slice(2,3);
-			var identity = lineItem.slice(3);
-			var tableData = document.createElement("td");
+var DOMs = {
+	infoEl: document.querySelector("#info"),
+	myCanvasEl: document.querySelector("#myCanvas"),
 
-			tableData.className = "square " + color;
-			tableData.colSpan = cSpan;
-			tableData.rowSpan = rSpan;
-			tableData.id = identity;
-			if (identity) {tableData.className+= " " + identity;}
-			console.log(tableData, !!(identity), identity,  tableData.className);
+	deleteChildren: function (elem){
+		while (elem.firstChild) {
+			elem.removeChild(elem.firstChild);
+		}
+	},
 
-			tableData.style.width = squareMeasure;
-			tableData.style.height = squareMeasure;
-			tableRow.appendChild( tableData );
+	updateInfoElement: function (){
+		DOMs.infoEl.innerHTML = "";
+		Array.prototype.forEach.call(arguments, function(arg){
+			DOMs.infoEl.innerHTML += arg + "<br/>";
 		});
+	},
+
+	activeEl: null
+
+};
+
+function Brick(color){
+
+	this.updatePosition = function(){
+		if (arguments.length) {
+			this.position[0] = arguments[0];
+			this.position[1] = arguments[1];
+		}
+
+		this.divElement.style.marginLeft = squareDimmension * this.position[0] + "px";		//setting coordinates
+		this.divElement.style.marginTop = squareDimmension * this.position[1] + "px";
+
+	};
+
+	this.updateDimmensions = function(){
+		this.divElement.style.width = squareDimmension + "px";		//mesueres of square
+		this.divElement.style.paddingBottom = squareDimmension + "px";
+	};
+
+	this.resize = function(){
+		this.updatePosition();
+		this.updateDimmensions();
+	};
+
+	helpers.squareDimmensionUPD();
+
+	this.position = [];
+	this.divElement = document.createElement("div");
+	this.divElement.classList.add("newBrick");
+	this.divElement.style.backgroundColor = color;
+	this.divElement.link = this;
+	this.focus = !this.focus;
+	this.updateDimmensions();
+
+
+	DOMs.myCanvasEl.appendChild(this.divElement);
+
+	this.divElement.addEventListener("click", function(){
+		if (DOMs.activeEl) { DOMs.activeEl.divElement.style.outline = ""; }
+		DOMs.activeEl = this.link;
+		DOMs.activeEl.divElement.style.outline = "2px solid red";
 	});
-	// var band = document.getElementById("band");
-	tagAppnedToParentId(  "span", "band" );
-	tagAppnedToParentId(  "span", "news" );
-	tagAppnedToParentId(  "span", "contact" );
-	tagAppnedToParentId(  "span", "media" );
 
-
-	// var news = document.getElementById("news");
-	// var contact = document.getElementById("contact");
-	// var media = document.getElementById("media");
-
-	// var bbb = document.createElement("div");
-	// bbb.innerHTML="BAND";
-	// band.appendChild(bbb);
-
-
-	// news.document.createElement("p").innerHTML="NEWS";
-	// contact.document.createElement("p").innerHTML="CONTACT";
-	// media.document.createElement("p").innerHTML="MEDIA";
 }
-recalculateSquares();
+
+helpers.init();
+var CUSTOMGRID = 13;
+var bricks = [];
+
+function spawnBricks(num){
+	var colors = ["red", "orange", "yellow", "green", "aqua", "blue", "fiolet"];
+
+	function randNumBetween(a,b){
+		return a + Math.round( Math.random() * b);
+
+	}
+
+	for (var i = 0; i < num; i++){
+		var color = colors[randNumBetween(0, colors.length - 1)];
+		console.log(color);
+		var coordX = randNumBetween(0, 12);
+		var coordY = randNumBetween(0, 12);
+		bricks.push( new Brick(color) );
+		bricks[i].updatePosition(coordX, coordY);
+	}
+
+}
+
+spawnBricks(25);
+
+bricks.push( new Brick("yellow") );
+bricks.push( new Brick("green") );
+bricks[1].updatePosition(4,0);
 
 
-window.addEventListener("resize", recalculateSquares);
+
+window.addEventListener("resize", function(){
+	helpers.squareDimmensionUPD();
+
+	DOMs.updateInfoElement(
+		"screenWidth: " + window.innerWidth + " px",
+		"screenHeight: " + window.innerHeight + " px"
+	);
+
+	bricks.forEach(function(el){
+		el.resize();
+	});
+
+});
+
+myCanvas.addEventListener("click", function(e){
+	DOMs.updateInfoElement();
+
+	var coords = helpers.calcDiscreteCoords(e.clientX, e.clientY);
+
+	DOMs.updateInfoElement( "x:" + e.clientX + ", y:" + e.clientY,
+							   "dX: " + coords[0] + ", dY: " + coords[1]);
+	if (DOMs.activeEl) {
+		DOMs.activeEl.updatePosition( coords[0], coords[1] );
+	}
+});
