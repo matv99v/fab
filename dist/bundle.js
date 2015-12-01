@@ -61,9 +61,23 @@
 
 		init: function(){
 			helpers.squareDimmensionUPD();
+		},
+
+		randNumBetween: function (a,b){
+			return a + Math.round( Math.random() * b);
+		},
+
+		spawnBricks: function (num){
+			var colors = ["red", "orange", "yellow", "green", "aqua", "blue", "fiolet"];
+
+			for (var i = 0; i < num; i++){
+				var color = colors[helpers.randNumBetween(0, colors.length - 1)];
+				var coordX = helpers.randNumBetween(0, 12);
+				var coordY = helpers.randNumBetween(0, 12);
+				bricks.push( new Brick(color) );
+				bricks[i].updatePosition(coordX, coordY);
+			}
 		}
-
-
 	};
 
 	var DOMs = {
@@ -126,40 +140,16 @@
 		this.divElement.addEventListener("click", function(){
 			if (DOMs.activeEl) { DOMs.activeEl.divElement.style.outline = ""; }
 			DOMs.activeEl = this.link;
-			DOMs.activeEl.divElement.style.outline = "2px solid red";
+			DOMs.activeEl.divElement.style.outline = "5px solid red";
 		});
 
 	}
 
+
 	helpers.init();
 	var CUSTOMGRID = 13;
 	var bricks = [];
-
-	function spawnBricks(num){
-		var colors = ["red", "orange", "yellow", "green", "aqua", "blue", "fiolet"];
-
-		function randNumBetween(a,b){
-			return a + Math.round( Math.random() * b);
-
-		}
-
-		for (var i = 0; i < num; i++){
-			var color = colors[randNumBetween(0, colors.length - 1)];
-			console.log(color);
-			var coordX = randNumBetween(0, 12);
-			var coordY = randNumBetween(0, 12);
-			bricks.push( new Brick(color) );
-			bricks[i].updatePosition(coordX, coordY);
-		}
-
-	}
-
-	spawnBricks(25);
-
-	bricks.push( new Brick("yellow") );
-	bricks.push( new Brick("green") );
-	bricks[1].updatePosition(4,0);
-
+	helpers.spawnBricks(25);
 
 
 	window.addEventListener("resize", function(){
@@ -224,7 +214,7 @@
 
 
 	// module
-	exports.push([module.id, "#info {\n  background-color: blue;\n  position: fixed;\n  color: white;\n  font-size: 20px;\n  bottom: 0; }\n\nbody {\n  padding: 0;\n  margin: 0;\n  font-family: ubuntu;\n  height: 100%; }\n\nhtml {\n  height: 100%; }\n\n.myCanvasClass {\n  background-color: #CEF6F5;\n  width: 100%;\n  height: 100%; }\n\n.newBrick {\n  display: inline-block;\n  position: fixed;\n  transition: margin ease-out 0.75s; }\n\n.brick {\n  display: inline-block;\n  position: fixed;\n  width: 7.69231%;\n  padding-bottom: 7.69231%; }\n\n.one {\n  margin-left: calc( 7.69231% * 0);\n  margin-top: calc( 7.69231% * 2);\n  background-color: green; }\n\n.two {\n  margin-left: calc( 7.69231% * 1);\n  margin-top: calc( 7.69231% * 3);\n  background-color: red; }\n\n.three {\n  margin-left: calc( 7.69231% * 2);\n  margin-top: calc( 7.69231% * 4);\n  background-color: yellow; }\n", ""]);
+	exports.push([module.id, "#info {\n  background-color: blue;\n  position: fixed;\n  color: white;\n  font-size: 20px;\n  bottom: 0; }\n\nbody {\n  padding: 0;\n  margin: 0;\n  font-family: ubuntu;\n  height: 100%; }\n\nhtml {\n  height: 100%; }\n\n.myCanvasClass {\n  background-color: #CEF6F5;\n  width: 100%;\n  height: 100%; }\n\n.newBrick {\n  display: inline-block;\n  position: fixed;\n  transition: margin ease-in-out 1s; }\n\n.brick {\n  display: inline-block;\n  position: fixed;\n  width: 7.69231%;\n  padding-bottom: 7.69231%; }\n\n.one {\n  margin-left: calc( 7.69231% * 0);\n  margin-top: calc( 7.69231% * 2);\n  background-color: green; }\n\n.two {\n  margin-left: calc( 7.69231% * 1);\n  margin-top: calc( 7.69231% * 3);\n  background-color: red; }\n\n.three {\n  margin-left: calc( 7.69231% * 2);\n  margin-top: calc( 7.69231% * 4);\n  background-color: yellow; }\n", ""]);
 
 	// exports
 
